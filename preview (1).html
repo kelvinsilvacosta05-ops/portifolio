@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Play Box - Assistência Técnica</title>
+<meta name="description" content="Play Box - Assistência técnica especializada em celulares, computadores e consoles. Manutenção feita na hora com garantia.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+/* ===== RESET ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+/* ===== TEMA (CORES) ===== */
+:root {
+    --azul: #4bc0d9;
+    --verde: #8dd9a0;
+    --bg: #f4f4f9;
+    --bg-card: #ffffff;
+    --bg-alt: #f9f9f9;
+    --texto: #333;
+    --texto-suave: #666;
+    --titulo: #1a1a1a;
+    --sombra: rgba(0,0,0,0.08);
+}
+body.dark {
+    --bg: #0f0f15;
+    --bg-card: #1e1e28;
+    --bg-alt: #25252f;
+    --texto: #e8e8e8;
+    --texto-suave: #aaa;
+    --titulo: #ffffff;
+    --sombra: rgba(0,0,0,0.5);
+}
+body {
+    background: var(--bg);
+    color: var(--texto);
+    line-height: 1.6;
+    transition: background 0.3s, color 0.3s;
+}
+.container { width: 90%; max-width: 1100px; margin: 0 auto; }
+
+/* ===== HEADER ===== */
+header {
+    background: #1a1a1a;
+    padding: 12px 0;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+body.dark header { background: #000; border-bottom: 1px solid #333; }
+.header-inner { display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; }
+.logo img { height: 45px; border-radius: 5px; background: #333; padding: 5px; }
+.menu { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+.menu a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
+.menu a:hover { color: var(--azul); }
+.menu .btn-orc {
+    background: #25d366; padding: 8px 14px; border-radius: 20px;
+    color: #fff; font-weight: bold; display: flex; align-items: center; gap: 5px;
+}
+.menu .btn-orc:hover { background: #128c7e; }
+.icons-top { display: flex; gap: 8px; align-items: center; }
+.icons-top a, .icons-top button {
+    width: 36px; height: 36px; border-radius: 50%; border: none;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 1rem; cursor: pointer;
+    text-decoration: none; transition: transform 0.3s;
+}
+.icons-top a.insta { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+.icons-top a.face { background: #1877f2; }
+.icons-top button.theme { background: #333; }
+.icons-top a:hover, .icons-top button:hover { transform: scale(1.1); }
+
+/* ===== HERO ===== */
+.hero {
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    color: #fff; padding: 70px 0; text-align: center;
+    border-bottom: 3px solid var(--azul);
+}
+.hero h1 { font-size: 2.4rem; margin-bottom: 15px; }
+.hero span { color: var(--verde); }
+.hero p { font-size: 1.1rem; color: #ccc; margin-bottom: 25px; }
+.btn-primario {
+    display: inline-block; background: linear-gradient(90deg, var(--verde), var(--azul));
+    color: #1a1a1a; padding: 14px 30px; border-radius: 30px;
+    text-decoration: none; font-weight: bold; font-size: 1rem;
+    border: none; cursor: pointer; transition: 0.3s;
+}
+.btn-primario:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(75,192,217,0.4); }
+
+/* ===== SEÇÕES ===== */
+section { padding: 55px 0; }
+section h2 { text-align: center; color: var(--titulo); font-size: 1.9rem; margin-bottom: 10px; }
+.sub { text-align: center; color: var(--texto-suave); margin-bottom: 35px; }
+
+/* ===== SERVIÇOS ===== */
+.servicos { background: var(--bg-card); }
+.grid-3 { display: flex; gap: 20px; flex-wrap: wrap; }
+.card {
+    flex: 1; min-width: 250px; background: var(--bg-alt); padding: 25px;
+    border-radius: 10px; text-align: center; border-bottom: 4px solid var(--azul);
+    box-shadow: 0 4px 6px var(--sombra); transition: transform 0.3s;
+}
+.card:hover { transform: translateY(-8px); }
+.card i { font-size: 2.3rem; color: var(--azul); margin-bottom: 12px; }
+.card h3 { color: var(--titulo); margin-bottom: 10px; }
+.card p { color: var(--texto-suave); font-size: 0.95rem; }
+.btn-card {
+    display: inline-block; margin-top: 15px; padding: 8px 18px;
+    background: var(--azul); color: #fff; text-decoration: none;
+    border-radius: 20px; font-size: 0.85rem; font-weight: bold; transition: 0.3s;
+}
+.btn-card:hover { background: #1a1a1a; }
+
+/* ===== DIFERENCIAIS ===== */
+.diferenciais { background: linear-gradient(135deg, #1a1a1a, #2a2a2a); }
+.diferenciais h2 { color: #fff; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 25px; margin-top: 25px; }
+.dif { text-align: center; color: #fff; }
+.dif i { font-size: 2.3rem; color: var(--verde); margin-bottom: 12px; }
+.dif h4 { margin-bottom: 6px; }
+.dif p { color: #bbb; font-size: 0.9rem; }
+
+/* ===== GALERIA ===== */
+.galeria { background: var(--bg-card); }
+.grid-galeria { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; }
+.foto { position: relative; overflow: hidden; border-radius: 10px; box-shadow: 0 4px 10px var(--sombra); }
+.foto img { width: 100%; display: block; transition: transform 0.4s; }
+.foto:hover img { transform: scale(1.05); }
+.tag { position: absolute; top: 10px; left: 10px; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; color: #fff; }
+.tag.antes { background: #e74c3c; }
+.tag.depois { background: #27ae60; }
+
+/* ===== DEPOIMENTOS ===== */
+.depoimentos { background: var(--bg-alt); }
+.grid-3 .dep {
+    background: var(--bg-card); padding: 22px; border-radius: 10px;
+    border-left: 4px solid var(--azul); box-shadow: 0 4px 10px var(--sombra);
+    flex: 1; min-width: 250px; transition: transform 0.3s;
+}
+.grid-3 .dep:hover { transform: translateY(-5px); }
+.estrelas { color: #ffc107; font-size: 1.1rem; margin-bottom: 8px; }
+.dep p { color: var(--texto-suave); font-style: italic; margin-bottom: 12px; }
+.dep strong { color: var(--titulo); }
+
+/* ===== SOBRE ===== */
+.sobre { background: var(--bg-card); text-align: center; }
+.sobre p { max-width: 750px; margin: 0 auto 12px; color: var(--texto-suave); font-size: 1.05rem; }
+
+/* ===== FAQ ===== */
+.faq { background: var(--bg); }
+.faq-lista { max-width: 800px; margin: 0 auto; }
+.faq-lista details {
+    background: var(--bg-card); padding: 15px 20px; border-radius: 8px;
+    margin-bottom: 10px; cursor: pointer; border-left: 4px solid var(--azul);
+    box-shadow: 0 2px 5px var(--sombra);
+}
+.faq-lista summary { font-weight: bold; color: var(--titulo); list-style: none; position: relative; padding-right: 25px; font-size: 1rem; }
+.faq-lista summary::-webkit-details-marker { display: none; }
+.faq-lista summary::after { content: "+"; position: absolute; right: 0; top: -3px; font-size: 1.4rem; color: var(--azul); font-weight: bold; }
+.faq-lista details[open] summary::after { content: "−"; }
+.faq-lista p { margin-top: 10px; color: var(--texto-suave); }
+
+/* ===== MAPA ===== */
+.local { background: var(--bg-alt); }
+.mapa { border-radius: 12px; overflow: hidden; border: 2px solid var(--azul); box-shadow: 0 6px 20px var(--sombra); height: 380px; }
+.mapa iframe { width: 100%; height: 100%; border: 0; display: block; }
+.info-local { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 20px; }
+.info-local span { display: flex; align-items: center; gap: 8px; color: var(--texto); font-size: 0.95rem; }
+.info-local i { color: var(--azul); font-size: 1.2rem; }
+
+/* Aviso Feriado */
+.aviso-feriado {
+    text-align: center;
+    margin-top: 15px;
+    padding: 12px 20px;
+    background: rgba(231, 76, 60, 0.1);
+    border: 1px solid rgba(231, 76, 60, 0.4);
+    border-radius: 8px;
+    color: #e74c3c;
+    font-weight: 600;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.95rem;
+}
+body.dark .aviso-feriado {
+    background: rgba(231, 76, 60, 0.15);
+    color: #ff6b5b;
+}
+.aviso-feriado i { margin-right: 5px; }
+
+/* ===== AGENDAMENTO ===== */
+.agendar { background: var(--bg-card); }
+.agendar-box {
+    max-width: 700px; margin: 0 auto; background: var(--bg-alt);
+    padding: 35px 25px; border-radius: 12px; text-align: center;
+    border: 2px solid var(--azul); box-shadow: 0 6px 20px var(--sombra);
+}
+.agendar-box i.cal { font-size: 3rem; color: var(--azul); margin-bottom: 15px; }
+.agendar-box h3 { color: var(--titulo); margin-bottom: 10px; }
+.agendar-box p { color: var(--texto-suave); margin-bottom: 20px; }
+
+/* ===== CONTATO ===== */
+.contato { background: #1a1a1a; }
+.contato h2 { color: #fff; }
+.contato .sub { color: #ccc; }
+form { max-width: 550px; margin: 0 auto; background: #2a2a2a; padding: 25px; border-radius: 10px; border: 1px solid #444; }
+.campo { margin-bottom: 18px; }
+.campo label { display: block; color: #fff; margin-bottom: 6px; font-weight: 500; }
+.campo input, .campo select, .campo textarea {
+    width: 100%; padding: 12px; border: 1px solid #555; border-radius: 5px;
+    background: #1a1a1a; color: #fff; font-size: 1rem; font-family: inherit;
+}
+.campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--azul); }
+form .btn-primario { width: 100%; }
+
+/* ===== CONSOLES ===== */
+.consoles { background: linear-gradient(135deg, #1a1a1a, #2a2a2a); color: #fff; }
+.consoles h2 { color: #fff; }
+.consoles .sub { color: #ccc; }
+.grid-consoles { display: flex; gap: 20px; flex-wrap: wrap; }
+.console-card {
+    flex: 1; min-width: 250px; background: rgba(255,255,255,0.05);
+    padding: 25px; border-radius: 10px; text-align: center;
+    border: 1px solid #333; border-bottom: 4px solid var(--verde);
+    transition: transform 0.3s;
+}
+.console-card:hover { transform: translateY(-8px); background: rgba(75,192,217,0.1); }
+.console-card i { font-size: 2.5rem; color: var(--verde); margin-bottom: 12px; }
+.console-card h3 { color: #fff; margin-bottom: 10px; }
+.console-card p { color: #bbb; font-size: 0.95rem; }
+.console-card .btn-console {
+    display: inline-block; margin-top: 15px; padding: 8px 18px;
+    background: var(--verde); color: #1a1a1a; text-decoration: none;
+    border-radius: 20px; font-size: 0.85rem; font-weight: bold; transition: 0.3s;
+}
+.console-card .btn-console:hover { background: var(--azul); transform: scale(1.05); }
+
+/* ===== FOOTER ===== */
+footer { background: #0a0a0a; color: #888; padding: 35px 0 20px; font-size: 0.9rem; }
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; margin-bottom: 25px; }
+.footer-grid h4 { color: var(--azul); margin-bottom: 12px; }
+.footer-grid p, .footer-grid a { color: #999; text-decoration: none; display: block; margin-bottom: 6px; transition: color 0.3s; }
+.footer-grid a:hover { color: var(--azul); }
+.social-footer { display: flex; gap: 10px; margin-top: 10px; }
+.social-footer a { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1rem; transition: transform 0.3s; }
+.social-footer a.insta { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+.social-footer a.face { background: #1877f2; }
+.social-footer a.wpp { background: #25d366; }
+.social-footer a:hover { transform: translateY(-3px) scale(1.1); }
+.footer-bottom { border-top: 1px solid #222; padding-top: 18px; text-align: center; }
+.footer-bottom strong { color: var(--azul); }
+.feito-por {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: #666;
+}
+.feito-por span {
+    color: var(--verde);
+    font-weight: bold;
+}
+
+/* ===== FLUTUANTES ===== */
+.wpp-float {
+    position: fixed; bottom: 25px; right: 25px;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: #25d366; color: #fff; font-size: 28px;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; z-index: 1000;
+    box-shadow: 0 4px 15px rgba(37,211,102,0.4);
+    transition: transform 0.3s; animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.7); }
+    50% { box-shadow: 0 0 0 15px rgba(37,211,102,0); }
+}
+.wpp-float:hover { background: #128c7e; transform: scale(1.1); animation: none; }
+
+.top-btn {
+    position: fixed; bottom: 95px; right: 25px;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--azul); color: #fff; border: none;
+    font-size: 1rem; cursor: pointer; opacity: 0; visibility: hidden;
+    transition: 0.3s; z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.top-btn.on { opacity: 1; visibility: visible; }
+.top-btn:hover { background: #1a1a1a; transform: translateY(-3px); }
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 850px) {
+    .header-inner { flex-direction: column; gap: 12px; }
+    .menu { justify-content: center; }
+    .hero h1 { font-size: 1.7rem; }
+    section { padding: 40px 0; }
+    section h2 { font-size: 1.5rem; }
+    .grid-3 { flex-direction: column; }
+    .grid-consoles { flex-direction: column; }
+    .wpp-float { width: 52px; height: 52px; font-size: 24px; bottom: 18px; right: 18px; }
+    .top-btn { bottom: 80px; right: 22px; }
+    .mapa { height: 280px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="container header-inner">
+        <div class="logo">
+            <img src="https://via.placeholder.com/150x50/333333/4bc0d9?text=PLAY+BOX" alt="Play Box">
+        </div>
+        <nav class="menu">
+            <a href="#servicos">Serviços</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#depoimentos">Depoimentos</a>
+            <a href="#faq">FAQ</a>
+            <a href="#local">Local</a>
+            <a href="#consoles">Consoles</a>
+            <a href="#contato" class="btn-orc"><i class="fab fa-whatsapp"></i> Orçamento</a>
+        </nav>
+        <div class="icons-top">
+            <a href="https://www.instagram.com/playbox_teresopolis" target="_blank" class="insta" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/share/1E8etewbCc/" target="_blank" class="face" title="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <button class="theme" id="btnTema" title="Alternar tema">
+                <i class="fas fa-moon" id="iconeTema"></i>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <h1>Sua assistência técnica de <span>confiança</span></h1>
+        <p>Conserto de Celulares, Computadores e Consoles com agilidade, peças de qualidade e garantia.</p>
+        <a href="#contato" class="btn-primario">Solicitar Orçamento Agora</a>
+    </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos" class="servicos">
+    <div class="container">
+        <h2>Nossos Serviços</h2>
+        <p class="sub">Soluções completas para celular, computador e console</p>
+        <div class="grid-3">
+            <div class="card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Celulares</h3>
+                <p>Troca de tela, bateria, conector de carga, reparo em placa e desbloqueio.</p>
+                <a href="https://wa.me/5521997093743?text=Ol%C3%A1!%20Preciso%20de%20conserto%20para%20meu%20celular." target="_blank" class="btn-card">Orçamento Rápido</a>
+            </div>
+            <div class="card">
+                <i class="fas fa-laptop"></i>
+                <h3>Computadores</h3>
+                <p>Formatação, limpeza, upgrade de SSD/RAM, troca de teclado e reparo de placa.</p>
+                <a href="https://wa.me/5521997093743?text=Ol%C3%A1!%20Preciso%20de%20conserto%20para%20meu%20computador." target="_blank" class="btn-card">Orçamento Rápido</a>
+            </div>
+            <div class="card">
+                <i class="fas fa-headphones"></i>
+                <h3>Acessórios</h3>
+                <p>Venda de fones, capinhas, películas e carregadores originais e homologados.</p>
+                <a href="https://wa.me/5521997093743?text=Ol%C3%A1!%20Gostaria%20de%20ver%20acess%C3%B3rios." target="_blank" class="btn-card">Ver Acessórios</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section class="diferenciais">
+    <div class="container">
+        <h2>Por que escolher a Play Box?</h2>
+        <div class="grid-4">
+            <div class="dif"><i class="fas fa-bolt"></i><h4>Manutenção na Hora</h4><p>Serviços rápidos</p></div>
+            <div class="dif"><i class="fas fa-shield-alt"></i><h4>Garantia de 90 dias</h4><p>Em todos os serviços</p></div>
+            <div class="dif"><i class="fas fa-tags"></i><h4>Preço Justo</h4><p>Orçamento sem compromisso</p></div>
+            <div class="dif"><i class="fas fa-check-circle"></i><h4>Peças de Qualidade</h4><p>Originais e homologadas</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- GALERIA -->
+<section id="galeria" class="galeria">
+    <div class="container">
+        <h2>Nossos Trabalhos</h2>
+        <p class="sub">Veja a qualidade do nosso serviço</p>
+        <div class="grid-galeria">
+            <div class="foto">
+                <img src="https://via.placeholder.com/400x300/333/4bc0d9?text=Tela+Trincada" alt="Antes">
+                <span class="tag antes">Antes</span>
+            </div>
+            <div class="foto">
+                <img src="https://via.placeholder.com/400x300/333/8dd9a0?text=Tela+Nova" alt="Depois">
+                <span class="tag depois">Depois</span>
+            </div>
+            <div class="foto">
+                <img src="https://via.placeholder.com/400x300/333/4bc0d9?text=Notebook+Lento" alt="Antes">
+                <span class="tag antes">Antes</span>
+            </div>
+            <div class="foto">
+                <img src="https://via.placeholder.com/400x300/333/8dd9a0?text=Notebook+R%C3%A1pido" alt="Depois">
+                <span class="tag depois">Depois</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section id="depoimentos" class="depoimentos">
+    <div class="container">
+        <h2>O que nossos clientes dizem</h2>
+        <p class="sub">A satisfação de quem confia na Play Box</p>
+        <div class="grid-3">
+            <div class="dep">
+                <div class="estrelas">★★★★★</div>
+                <p>"Consertaram a tela do meu iPhone em 40 minutos. Excelente!"</p>
+                <strong>- João Silva</strong>
+            </div>
+            <div class="dep">
+                <div class="estrelas">★★★★★</div>
+                <p>"Formataram meu notebook e colocaram SSD. Ficou novo!"</p>
+                <strong>- Maria Oliveira</strong>
+            </div>
+            <div class="dep">
+                <div class="estrelas">★★★★★</div>
+                <p>"Preço justo e muita honestidade. Recomendo!"</p>
+                <strong>- Carlos Souza</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SOBRE -->
+<section class="sobre">
+    <div class="container">
+        <h2>Manutenção feita na hora</h2>
+        <p>Na <strong>Play Box</strong>, sabemos que ficar sem celular, computador ou console não é opção. Nossa equipe é especializada em diagnósticos rápidos e reparos eficientes.</p>
+        <p>Utilizamos peças de alta qualidade e oferecemos garantia em todos os serviços.</p>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="faq">
+    <div class="container">
+        <h2>Perguntas Frequentes</h2>
+        <p class="sub">Tire suas dúvidas antes de nos contatar</p>
+        <div class="faq-lista">
+            <details>
+                <summary>Quanto tempo demora um conserto?</summary>
+                <p>Reparos simples (como troca de tela ou bateria) são feitos em até 1 hora. Já o <strong>conserto de placas</strong> pode levar de <strong>3 a 4 dias úteis</strong>, dependendo da complexidade do problema.</p>
+            </details>
+            <details>
+                <summary>Vocês dão garantia?</summary>
+                <p>Sim! Todos os serviços têm garantia de 90 dias. Peças novas também possuem garantia do fabricante.</p>
+            </details>
+            <details>
+                <summary>Qual o horário de funcionamento?</summary>
+                <p>Funcionamos de <strong>segunda a sábado, das 10h às 18h</strong>. <strong>Não abrimos em feriados.</strong></p>
+            </details>
+            <details>
+                <summary>Preciso agendar?</summary>
+                <p>Não é obrigatório, mas recomendamos mandar mensagem no WhatsApp antes para agilizar.</p>
+            </details>
+            <details>
+                <summary>Quais formas de pagamento?</summary>
+                <p>Aceitamos dinheiro, PIX, cartão de débito e crédito (com parcelamento).</p>
+            </details>
+            <details>
+                <summary>Consertam todas as marcas?</summary>
+                <p>Trabalhamos com Apple, Samsung, Motorola, Xiaomi, LG, entre outras. Também atendemos consoles.</p>
+            </details>
+        </div>
+    </div>
+</section>
+
+<!-- MAPA -->
+<section id="local" class="local">
+    <div class="container">
+        <h2>Onde Estamos</h2>
+        <p class="sub">Venha nos visitar em Teresópolis</p>
+        <div class="mapa">
+            <iframe src="https://www.google.com/maps?q=Rua+Monte+L%C3%ADbano,+49,+Teres%C3%B3polis+-+RJ&output=embed" loading="lazy"></iframe>
+        </div>
+        <div class="info-local">
+            <span><i class="fas fa-map-marker-alt"></i> Rua Monte Líbano, Nº 49 - Teresópolis/RJ</span>
+            <span><i class="fas fa-clock"></i> Seg a Sáb: 10h às 18h</span>
+            <span><i class="fas fa-phone"></i> (21) 99709-3743</span>
+        </div>
+        <div class="aviso-feriado">
+            <i class="fas fa-exclamation-circle"></i> Não funcionamos em feriados.
+        </div>
+    </div>
+</section>
+
+<!-- AGENDAMENTO -->
+<section class="agendar">
+    <div class="container">
+        <h2>Agende seu Atendimento</h2>
+        <p class="sub">Escolha o melhor horário para você</p>
+        <div class="agendar-box">
+            <i class="fas fa-calendar-check cal"></i>
+            <h3>Agendamento Online</h3>
+            <p>Clique abaixo para agendar seu atendimento pelo WhatsApp.</p>
+            <a href="https://wa.me/5521997093743?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20atendimento." target="_blank" class="btn-primario">
+                <i class="fab fa-whatsapp"></i> Agendar pelo WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato" class="contato">
+    <div class="container">
+        <h2>Solicite seu Orçamento</h2>
+        <p class="sub">Preencha e enviaremos para o WhatsApp</p>
+        <form id="formOrc">
+            <div class="campo">
+                <label for="nome">Seu Nome:</label>
+                <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+            </div>
+            <div class="campo">
+                <label for="aparelho">Aparelho:</label>
+                <select id="aparelho" required>
+                    <option value="">Selecione...</option>
+                    <option value="Celular">Celular</option>
+                    <option value="Computador/Notebook">Computador / Notebook</option>
+                    <option value="Console">Console (PS, Xbox, Nintendo)</option>
+                    <option value="Outro">Outro</option>
+                </select>
+            </div>
+            <div class="campo">
+                <label for="defeito">Descreva o problema:</label>
+                <textarea id="defeito" rows="4" placeholder="Ex: Tela trincada, não liga, bateria viciada..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primario">Enviar para o WhatsApp</button>
+        </form>
+    </div>
+</section>
+
+<!-- CONSOLES -->
+<section id="consoles" class="consoles">
+    <div class="container">
+        <h2>Também Mexemos com Consoles</h2>
+        <p class="sub">Assistência especializada para os principais videogames do mercado</p>
+        <div class="grid-consoles">
+            <div class="console-card">
+                <i class="fab fa-playstation"></i>
+                <h3>PlayStation</h3>
+                <p>Reparo de leitor, troca de HD/SSD, limpeza, superaquecimento e manutenção em PS3, PS4 e PS5.</p>
+                <a href="https://wa.me/5521997093743?text=Ol%C3%A1!%20Preciso%20de%20conserto%20para%20meu%20PlayStation." target="_blank" class="btn-console">Orçamento PS</a>
+            </div>
+            <div class="console-card">
+                <i class="fab fa-xbox"></i>
+                <h3>Xbox</h3>
+                <p>Reparo de leitor, troca de HD, limpeza, problema de aquecimento e manutenção em Xbox 360, One e Series X/S.</p>
+                <a href="https://wa.me/5521997093743?text=Ol%C3%A1!%20Preciso%20de%20conserto%20para%20meu%20Xbox." target="_blank" class="btn-console">Orçamento Xbox</a>
+            </div>
+            <div class="console-card">
+                <i class="fas fa-gamepad"></i>
+                <h3>Nintendo</h3>
+                <p>Reparo de Joy-Con, drift, troca de tela, bateria e manutenção geral em Switch e Switch Lite.</p>
+                <a href="https://wa.me/5521997093743?text=Ol%C3%A1!%20Preciso%20de%20conserto%20para%20meu%20Nintendo%20Switch." target="_blank" class="btn-console">Orçamento Nintendo</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <h4>Play Box</h4>
+                <p>Assistência técnica especializada em celulares, computadores e consoles. Manutenção na hora com garantia.</p>
+            </div>
+            <div>
+                <h4>Contato</h4>
+                <a href="https://wa.me/5521997093743" target="_blank"><i class="fab fa-whatsapp"></i> (21) 99709-3743</a>
+                <p><i class="fas fa-map-marker-alt"></i> Rua Monte Líbano, Nº 49 - Teresópolis/RJ</p>
+                <p><i class="fas fa-clock"></i> Seg a Sáb: 10h às 18h</p>
+                <p><i class="fas fa-info-circle"></i> Não abrimos em feriados</p>
+            </div>
+            <div>
+                <h4>Redes Sociais</h4>
+                <div class="social-footer">
+                    <a href="https://www.instagram.com/playbox_teresopolis" target="_blank" class="insta"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/share/1E8etewbCc/" target="_blank" class="face"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://wa.me/5521997093743" target="_blank" class="wpp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2024 <strong>Play Box</strong> - Manutenção e Acessórios. Todos os direitos reservados.
+            <div class="feito-por">Feito por <span>Kelvin</span></div>
+        </div>
+    </div>
+</footer>
+
+<!-- FLUTUANTES -->
+<a href="https://wa.me/5521997093743?text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento!" target="_blank" class="wpp-float" title="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+<button class="top-btn" id="topBtn" title="Voltar ao topo">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+// ===== FORMULÁRIO =====
+document.getElementById('formOrc').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nome = document.getElementById('nome').value.trim();
+    const aparelho = document.getElementById('aparelho').value;
+    const defeito = document.getElementById('defeito').value.trim();
+
+    if (!nome || !aparelho || !defeito) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+    }
+
+    const msg = `Olá, Play Box! Meu nome é *${nome}*.\n\n` +
+                `📱 *Aparelho:* ${aparelho}\n` +
+                `🔧 *Problema:* ${defeito}\n\n` +
+                `Gostaria de solicitar um orçamento.`;
+
+    window.open(`https://wa.me/5521997093743?text=${encodeURIComponent(msg)}`, '_blank');
+    this.reset();
+});
+
+// ===== TEMA ESCURO/CLARO =====
+const btnTema = document.getElementById('btnTema');
+const iconeTema = document.getElementById('iconeTema');
+
+if (localStorage.getItem('tema') === 'dark') {
+    document.body.classList.add('dark');
+    iconeTema.classList.replace('fa-moon', 'fa-sun');
+}
+
+btnTema.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+    const isDark = document.body.classList.contains('dark');
+    iconeTema.classList.toggle('fa-moon', !isDark);
+    iconeTema.classList.toggle('fa-sun', isDark);
+    localStorage.setItem('tema', isDark ? 'dark' : 'light');
+});
+
+// ===== BOTÃO VOLTAR AO TOPO =====
+const topBtn = document.getElementById('topBtn');
+window.addEventListener('scroll', () => {
+    topBtn.classList.toggle('on', window.scrollY > 400);
+});
+topBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+</body>
+</html>
