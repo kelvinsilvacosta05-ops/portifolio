@@ -50,7 +50,13 @@ header {
 }
 body.dark header { background: #000; border-bottom: 1px solid #333; }
 .header-inner { display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; }
-.logo img { height: 150px; windth: auto; }
+.logo img {
+    height: 100px; 
+    background: #1a1a1a;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+}
 .menu { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
 .menu a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
 .menu a:hover { color: var(--azul); }
