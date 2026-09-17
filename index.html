@@ -50,7 +50,13 @@ header {
 }
 body.dark header { background: #000; border-bottom: 1px solid #333; }
 .header-inner { display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; }
-.logo img { height: 100px; }
+.logo img { height: 100px; 
+           width: auto;
+          background: none;
+          border: none;
+          padding: 0;
+          box-shadows:none;
+          }
 .menu { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
 .menu a { color: #fff; text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s; }
 .menu a:hover { color: var(--azul); }
@@ -308,7 +314,11 @@ footer { background: #0a0a0a; color: #888; padding: 35px 0 20px; font-size: 0.9r
 <header>
     <div class="container header-inner">
         <div class="logo">
-            <img src="logo_play.jpg" alt="Play Box">
+            <div class="logo">
+    <a href="#">
+        <img src=logo_play.jpg alt="Play Box Logo">
+    </a>
+</div>
         </div>
         <nav class="menu">
             <a href="#servicos">Serviços</a>
